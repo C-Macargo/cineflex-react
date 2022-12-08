@@ -1,33 +1,44 @@
 import Header from "./components/Header"
-import Requisitions from "./components/Requisitions"
 import MovieSelection from "./pages/MovieSelection";
-import CurrentTask from "./components/CurrentTask"
+import MovieTime from "./pages/MovieTime"
+
 import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export default function App() {
-
     const [listafilmnes, setListFilmes] = useState(undefined);
-    const [currentTask, setCurrentTask] = useState("Selecione o filme");
-
-
+    const [currentMovie, setCurrentMovie] = useState(undefined);
+    const [movieNumber, setMovieNumber] = useState(undefined)
     return (
-        <>
+        <BrowserRouter>
 
-            <Requisitions
-                listafilmnes={listafilmnes}
-                setListFilmes={setListFilmes}
-            />
+            <>
 
-            <Header />
-            <CurrentTask 
-            currentTask = {currentTask}
-            />
+                <Header />
+                <Routes>
 
-            <MovieSelection
-                listafilmnes={listafilmnes}
-                setListFilmes={setListFilmes}
-            />
+                    <Route path="/" element={<MovieSelection
+                        listafilmnes={listafilmnes}
+                        setListFilmes={setListFilmes}
+                        movieNumber={movieNumber}
+                        setCurrentMovie={setCurrentMovie}
+                        setMovieNumber={setMovieNumber}
+                    />}
+                    />
 
-        </>
+                    <Route path="/MovieTime/:movieID" element={<MovieTime
+                        currentMovie={currentMovie}
+                        movieNumber={movieNumber}
+                        setMovieNumber={setMovieNumber}
+                        setCurrentMovie={setCurrentMovie}
+                    />}
+                    />
+
+                </Routes>
+
+            </>
+
+        </BrowserRouter>
+
     )
 }
