@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header"
+import Requisitions from "./components/Requisitions"
+import MovieSelection from "./pages/MovieSelection";
+import CurrentTask from "./components/CurrentTask"
+import { useState, useEffect } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+
+    const [listafilmnes, setListFilmes] = useState(undefined);
+    const [currentTask, setCurrentTask] = useState("Selecione o filme");
+
+
+    return (
+        <>
+
+            <Requisitions
+                listafilmnes={listafilmnes}
+                setListFilmes={setListFilmes}
+            />
+
+            <Header />
+            <CurrentTask 
+            currentTask = {currentTask}
+            />
+
+            <MovieSelection
+                listafilmnes={listafilmnes}
+                setListFilmes={setListFilmes}
+            />
+
+        </>
+    )
 }
-
-export default App;
