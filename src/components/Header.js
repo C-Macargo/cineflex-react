@@ -1,9 +1,12 @@
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 export default function Header(){
     return(
 <HeaderFlex>
-<p>CINEFLEX</p>
+    <Link to={"/"}>
+        <p>CINEFLEX</p>
+    </Link>
 </HeaderFlex>
 )
 }
@@ -13,8 +16,8 @@ const HeaderFlex =  styled.header`
 display:flex;
 align-items:center;
 justify-content:center;
-margin:auto;
-width: 375px;
+top : 0px;
+width: 100%;
 height: 67px;
 background: #C3CFD9;
 

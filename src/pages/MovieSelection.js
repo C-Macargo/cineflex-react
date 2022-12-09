@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 
-export default function MovieSelection({ listafilmnes, setMovieNumber, movie, setListFilmes,}) {
+export default function MovieSelection({ listafilmnes, setMovieNumber, setListFilmes,}) {
 
     useEffect(() => {
         
@@ -30,7 +30,9 @@ export default function MovieSelection({ listafilmnes, setMovieNumber, movie, se
             {listafilmnes.map(movie => (
                 <Link to={`/MovieTime/${movie.id}`} key={movie.title} >
                 <MovieContainer >
-                    <img onClick={() => {}} src={movie.posterURL} alt={movie.title} />
+                    <img onClick={() => {
+                        setMovieNumber(movie.id)
+                        }} src={movie.posterURL} alt={movie.title} />
                 </MovieContainer>
                 </Link>
             ))}
@@ -45,7 +47,7 @@ export default function MovieSelection({ listafilmnes, setMovieNumber, movie, se
 const CurrentPage = styled.div`
     margin: auto;
     display:flex;
-    width: 375px;
+    width: 100%;
     height: 67px;
     background: white;
     align-items:center;
@@ -65,11 +67,12 @@ p{
 `
 
 const MovieList = styled.div`
+    
     display:flex;
     flex-wrap:wrap;
     justify-content: space-around;
     margin:auto;
-    width: 375px;
+    width: 100%;
     background: white;
 `
 

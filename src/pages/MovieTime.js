@@ -2,6 +2,7 @@ import styled from "styled-components"
 import axios from "axios";
 import { useEffect,} from "react";
 import { useParams } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 
 export default function MovieTime({currentMovie, setCurrentMovie ,}){
@@ -17,18 +18,35 @@ export default function MovieTime({currentMovie, setCurrentMovie ,}){
         return <div>Carregando...</div>
     }
     
-
-
+    const dates = currentMovie.days
+    const sessions = dates.showtimes
+    console.log(sessions)
+    console.log(dates)
 
     return (
         <>
         <CurrentPage>
             <p>Selecione o horário</p>
         </CurrentPage>
+
         <TimeContainer>
-            <p>{currentMovie.title}</p>
+            {dates.map(date => (
+                <p>{date.weekday} - {date.date} 
+                    {date.showtimes.map(showtime => 
+                        <Link to={`/SeatSelection/${showtime.id}`}>
+                        <button>{showtime.name}</button>    
+                        </Link>
+                        )}
+                </p>))}
         </TimeContainer>
+
+        <Footer>
+            <img src = {currentMovie.posterURL}></img>
+            <p>{currentMovie.title}</p>
+        </Footer>
+
         </>
+
     )
     
 }
@@ -37,7 +55,7 @@ export default function MovieTime({currentMovie, setCurrentMovie ,}){
 const CurrentPage = styled.div`
     margin: auto;
     display:flex;
-    width: 375px;
+    width: 100%;
     height: 67px;
     background: white;
     align-items:center;
@@ -58,10 +76,29 @@ p{
 const TimeContainer = styled.div `
 
 display:flex;
-
+flex-direction:column;
+align-items:center;
+margin:auto;
 `
-const MovieContainer = styled.div `
 
-display:flex;
+const Footer = styled.footer `
+    display:flex;
+    width: 100%;
+    height: 117px;
+    background-color: green;
+    position:fixed;
+    bottom:0px;
+    align-items:center;
+    justify-content:center;
+
+    img{
+        height: 72px;
+        left: 17px;
+        margin-left:18px;
+    }
+
+    p{
+        margin-left:15px;
+    }
 
 `
