@@ -30,17 +30,17 @@ export default function MovieTime({currentMovie, setCurrentMovie ,}){
 
         <TimeContainer>
             {dates.map(date => (
-                <div><p>{date.weekday} - {date.date} </p>
+                <div data-test="movie-day"><p>{date.weekday} - {date.date} </p>
                     {date.showtimes.map(showtime => 
                         <Link to={`/SeatSelection/${showtime.id}`}>
-                        <button>{showtime.name}</button>    
+                        <button data-test="showtime">{showtime.name}</button>    
                         </Link>
 
                         )}
                 </div>))}
         </TimeContainer>
 
-        <Footer>
+        <Footer data-test="footer">
             <img src = {currentMovie.posterURL}></img>
             <p>{currentMovie.title}</p>
         </Footer>

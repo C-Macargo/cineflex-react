@@ -29,7 +29,7 @@ export default function MovieSelection({ listafilmnes, setMovieNumber, setListFi
         <MovieList>
             {listafilmnes.map(movie => (
                 <Link to={`/MovieTime/${movie.id}`} key={movie.title} >
-                <MovieContainer >
+                <MovieContainer data-test="movie">
                     <img onClick={() => {
                         setMovieNumber(movie.id)
                         }} src={movie.posterURL} alt={movie.title} />

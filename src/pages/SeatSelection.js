@@ -97,14 +97,14 @@ export default function SeatSelection({ setCurrentSeats, currenSeats, setFinalAr
                 {seats.map(seat => (
     
                         !seat.selected ? (
-                            <SeatButton key={seat.name} className={`seat-${seat.isAvailable}`} 
+                            <SeatButton data-test="seat" key={seat.name} className={`seat-${seat.isAvailable}`} 
                                             onClick={() => handleSeat(seat)}>
                             
                             {seat.name}
                             
                             </SeatButton>
                         ) : (
-                            <SeatButton key={seat.name} className={`true`} 
+                            <SeatButton  data-test="seat" key={seat.name} className={`true`} 
                                             onClick={() => handleSeat(seat)}>
                             
                             {seat.name}
@@ -139,6 +139,7 @@ export default function SeatSelection({ setCurrentSeats, currenSeats, setFinalAr
             <InputBox>
                 <p>Nome do comprador:</p>
                     <input
+                        data-test="client-name"
                         type="text"
                         value={userName}
                         onChange={event => setUserName(event.target.value)}
@@ -148,6 +149,7 @@ export default function SeatSelection({ setCurrentSeats, currenSeats, setFinalAr
 
                 <p>CPF do comprador:</p>
                     <input
+                        data-test="client-cpf"
                         type="text"
                         value={userCPF}
                         onChange={event => setUserCPF(event.target.value)}
@@ -159,12 +161,12 @@ export default function SeatSelection({ setCurrentSeats, currenSeats, setFinalAr
 
 
             <SaveSeatButton>
-                    <button onClick = {SendPostRequest} >
+                    <button data-test="book-seat-btn" onClick = {SendPostRequest} >
                         Reservar Assento(s)
                     </button>
             </SaveSeatButton>
 
-            <Footer>
+            <Footer data-test="footer">
                 <img src={currenSeats.movie.posterURL}></img>
                 <p>{currenSeats.movie.title} </p>
                 <p>{currenSeats.day.weekday}  {currenSeats.name} </p>

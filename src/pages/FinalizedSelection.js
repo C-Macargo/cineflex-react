@@ -15,7 +15,7 @@ export default function FinalizedSelection({finalArray}){
 
         <FinalPageBox>
 
-            <div>
+            <div data-test="movie-info">
             <h1>Filme e sessão</h1>
                 <p>{finalPageContent.movie.movieName}</p>
                 <p>{finalPageContent.day.movieDate} {finalPageContent.time.movieTime}</p>
@@ -23,19 +23,19 @@ export default function FinalizedSelection({finalArray}){
             </div>
 
 
-            <div>
+            <div data-test="seats-info">
             <h1>Ingressos</h1>
             {finalPageContent.seats.selectedSeats.map(seat => <p key={seat.name}>{`Assento: ${seat.name}`}</p>)}
             </div>
 
 
-            <div>
+            <div data-test="client-info">
             <h1>Comprador</h1>
                 <p>Nome: {finalPageContent.nome.userName}</p>
                 <p>CPF: {finalPageContent.cpf.userCPF}</p>
             </div>
 
-            <ReturnHomeButton>
+            <ReturnHomeButton data-test="go-home-btn">
             <Link to={"/"}>
             <p>Voltar para Home</p>
             </Link>
