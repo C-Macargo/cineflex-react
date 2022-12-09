@@ -19,7 +19,7 @@ export default function SeatSelection({ setCurrentSeats, currenSeats, setFinalAr
     
     function handleSeat(seat) {
         setMovieName(currenSeats.movie.title)
-        setMovieDate(currenSeats.day.weekday)
+        setMovieDate(currenSeats.day.date)
         setMovieTime(currenSeats.name)
         if (seat.isAvailable === false) {
             alert("Esse assento não está disponível")
@@ -132,7 +132,7 @@ export default function SeatSelection({ setCurrentSeats, currenSeats, setFinalAr
                     <SamplingButton color="#C3CFD9" ></SamplingButton>
                     <p>Disponível</p>
                 </SamplingInner>
-                <SamplingInner>
+                <SamplingInner>ta
                     <SamplingButton color="#FBE192" ></SamplingButton>
                     <p>Indisponível</p>
                 </SamplingInner>
