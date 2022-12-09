@@ -7,14 +7,14 @@ import axios from 'axios';
 
 
 export default function MovieSelection({ listafilmnes, setMovieNumber, setListFilmes,}) {
+    
+
 
     useEffect(() => {
         
         const requisicaofilmes = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies")
 
 		requisicaofilmes.then(resposta => {setListFilmes(resposta.data);});}, []);
-    
-    
     
     if (listafilmnes === undefined) {
         return <div>Carregando...</div>
@@ -72,7 +72,7 @@ const MovieList = styled.div`
     flex-wrap:wrap;
     justify-content: space-around;
     margin:auto;
-    width: 100%;
+    width: 316px;
     background: white;
 `
 

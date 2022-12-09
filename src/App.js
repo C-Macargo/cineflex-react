@@ -3,6 +3,7 @@ import MovieSelection from "./pages/MovieSelection";
 import MovieTime from "./pages/MovieTime"
 import SeatSelection from "./pages/SeatSelection"
 import FinalizedSelection from "./pages/FinalizedSelection"
+import "./styles/styles.css"
 
 
 import { useState, useEffect } from 'react';
@@ -13,6 +14,12 @@ export default function App() {
     const [currentMovie, setCurrentMovie] = useState(undefined);
     const [currenSeats, setCurrentSeats] = useState(undefined);
     const [movieNumber, setMovieNumber] = useState(undefined)
+    const [pickedSeats, setPickedSeats] = useState ([])
+    const [selectedSeats, setSelectedSeats] = useState([]);
+
+
+
+
     return (
         <BrowserRouter>
 
@@ -40,6 +47,10 @@ export default function App() {
                     <Route path="/SeatSelection/:seatID" element ={<SeatSelection
                         currenSeats = {currenSeats}
                         setCurrentSeats = {setCurrentSeats}
+                        pickedSeats = {pickedSeats}
+                        setPickedSeats = {setPickedSeats}
+                        selectedSeats = {selectedSeats}
+                        setSelectedSeats = {setSelectedSeats}
                     />}
                     />
                     <Route path="/FinalizedSelection" element ={<FinalizedSelection

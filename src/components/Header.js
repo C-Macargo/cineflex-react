@@ -13,11 +13,11 @@ export default function Header(){
 
 
 const HeaderFlex =  styled.header`
+margin:auto;
 display:flex;
 align-items:center;
 justify-content:center;
-top : 0px;
-width: 100%;
+width: 316px;
 height: 67px;
 background: #C3CFD9;
 
