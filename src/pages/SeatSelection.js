@@ -22,21 +22,24 @@ export default function SeatSelection({ setCurrentSeats, currenSeats, setFinalAr
         setMovieDate(currenSeats.day.weekday)
         setMovieTime(currenSeats.name)
         if (seat.isAvailable === false) {
+            alert("Esse assento não está disponível")
             return;
         }
         //Toggle - "Liga e desliga" a seleção
         seat.selected = !seat.selected;
-    
         //Se o estado atual é não selecionado precisamos remover o assento
         if (!seat.selected) {
             const filteredSeats = selectedSeats.filter((s) => !(s.name === seat.name));
             setSelectedSeats([...filteredSeats]);
         return;
+            
         }
+
         //Adicionamos o assento a lista de assentos selecionados
         setSelectedSeats([...selectedSeats, seat]);
         setSentData([...sentData, seat.id])
         EndOfOrder()
+
 
     }
 
@@ -77,7 +80,7 @@ export default function SeatSelection({ setCurrentSeats, currenSeats, setFinalAr
                 cpf: userCPF,
             }).then(r => {
                 EndOfOrder()
-                next("/FinalizedSelection")
+                next("/sucesso")
                 
             }).catch(err => {
                 console.log(err)

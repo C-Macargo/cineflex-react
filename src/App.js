@@ -54,7 +54,7 @@ export default function App() {
                         setFinalArray={setFinalArray}
                     />}
                     />
-                    <Route path="/FinalizedSelection" element ={<FinalizedSelection
+                    <Route path="/sucesso" element ={<FinalizedSelection
                         finalArray = {finalArray}
                     />}
                     />
