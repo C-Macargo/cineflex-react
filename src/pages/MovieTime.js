@@ -32,7 +32,7 @@ export default function MovieTime({currentMovie, setCurrentMovie ,}){
             {dates.map(date => (
                 <div data-test="movie-day"><p>{date.weekday} - {date.date} </p>
                     {date.showtimes.map(showtime => 
-                        <Link to={`/SeatSelection/${showtime.id}`}>
+                        <Link to={`/assentos/${showtime.id}`}>
                         <button data-test="showtime">{showtime.name}</button>    
                         </Link>
 

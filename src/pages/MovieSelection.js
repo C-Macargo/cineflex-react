@@ -28,13 +28,15 @@ export default function MovieSelection({ listafilmnes, setMovieNumber, setListFi
 
         <MovieList>
             {listafilmnes.map(movie => (
-                <Link to={`/MovieTime/${movie.id}`} key={movie.title} >
+                <div data-test="movie">
+                <Link to={`/sessoes/${movie.id}`} key={movie.title} >
                 <MovieContainer >
-                    <img data-test="movie" onClick={() => {
+                    <img onClick={() => {
                         setMovieNumber(movie.id)
                         }} src={movie.posterURL} alt={movie.title} />
                 </MovieContainer>
                 </Link>
+                </div>
             ))}
         </MovieList>
         </>

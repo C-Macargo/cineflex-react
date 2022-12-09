@@ -37,14 +37,14 @@ export default function App() {
                     />}
                     />
 
-                    <Route path="/MovieTime/:movieID" element={<MovieTime
+                    <Route path="/sessoes/:movieID" element={<MovieTime
                         currentMovie={currentMovie}
                         movieNumber={movieNumber}
                         setMovieNumber={setMovieNumber}
                         setCurrentMovie={setCurrentMovie}
                     />}
                     />
-                    <Route path="/SeatSelection/:seatID" element ={<SeatSelection
+                    <Route path="/assentos/:seatID" element ={<SeatSelection
                         currenSeats = {currenSeats}
                         setCurrentSeats = {setCurrentSeats}
                         pickedSeats = {pickedSeats}
