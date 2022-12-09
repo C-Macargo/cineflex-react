@@ -16,7 +16,7 @@ export default function App() {
     const [movieNumber, setMovieNumber] = useState(undefined)
     const [pickedSeats, setPickedSeats] = useState ([])
     const [selectedSeats, setSelectedSeats] = useState([]);
-
+    const [finalArray, setFinalArray] = useState({})
 
 
 
@@ -51,10 +51,11 @@ export default function App() {
                         setPickedSeats = {setPickedSeats}
                         selectedSeats = {selectedSeats}
                         setSelectedSeats = {setSelectedSeats}
+                        setFinalArray={setFinalArray}
                     />}
                     />
                     <Route path="/FinalizedSelection" element ={<FinalizedSelection
-                    
+                        finalArray = {finalArray}
                     />}
                     />
 

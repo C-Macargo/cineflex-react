@@ -2,15 +2,25 @@ import styled from "styled-components"
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function SeatSelection({ setCurrentSeats, currenSeats, setPickedSeats, pickedSeats, }) {
+export default function SeatSelection({ setCurrentSeats, currenSeats, setFinalArray, pickedSeats, }) {
     const [selectedSeats, setSelectedSeats] = useState([]);
     const { seatID } = useParams()
+    const [userCPF, setUserCPF] = useState("");
+    const [userName, setUserName] = useState("");
+    const [movieName, setMovieName] = useState("");
+    const [movieDate, setMovieDate] = useState("");
+    const [movieTime, setMovieTime] = useState("");
+    const [sentData, setSentData] = useState([])
 
 
+    const next = useNavigate();
+    
     function handleSeat(seat) {
-        //Se o assento estiver indisponível não faz nada
+        setMovieName(currenSeats.movie.title)
+        setMovieDate(currenSeats.day.weekday)
+        setMovieTime(currenSeats.name)
         if (seat.isAvailable === false) {
             return;
         }
@@ -25,8 +35,10 @@ export default function SeatSelection({ setCurrentSeats, currenSeats, setPickedS
         }
         //Adicionamos o assento a lista de assentos selecionados
         setSelectedSeats([...selectedSeats, seat]);
+        setSentData([...sentData, seat.id])
+        EndOfOrder()
+
     }
-    console.log(selectedSeats)
 
     useEffect(() => {
 
@@ -40,10 +52,39 @@ export default function SeatSelection({ setCurrentSeats, currenSeats, setPickedS
         return <div>Carregando...</div>
     }
     const seats = currenSeats.seats
-    console.log(seats)
-    console.log(pickedSeats)
 
+    function EndOfOrder(){
+        setFinalArray(
+            {
+            nome:{userName},
+            cpf:{userCPF},
+            seats:{selectedSeats},
+            movie:{movieName},
+            day:{movieDate},
+            time:{movieTime}
+            }
+            
+        )    
+        }
+        function SendPostRequest(event) {
+            event.preventDefault();   
+            const sendSeatsUrl = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many"
+    
+            axios.post(
+                sendSeatsUrl, {
+                ids: sentData,
+                name: userName,
+                cpf: userCPF,
+            }).then(r => {
+                EndOfOrder()
+                next("/FinalizedSelection")
+                
+            }).catch(err => {
+                console.log(err)
+            });
+        }
 
+    
 
     return (
         <>
@@ -55,16 +96,15 @@ export default function SeatSelection({ setCurrentSeats, currenSeats, setPickedS
 
                 {seats.map(seat => (
     
-                        
                         !seat.selected ? (
-                            <SeatButton  className={`seat-${seat.isAvailable}`} 
+                            <SeatButton key={seat.name} className={`seat-${seat.isAvailable}`} 
                                             onClick={() => handleSeat(seat)}>
                             
                             {seat.name}
                             
                             </SeatButton>
                         ) : (
-                            <SeatButton  className={`true`} 
+                            <SeatButton key={seat.name} className={`true`} 
                                             onClick={() => handleSeat(seat)}>
                             
                             {seat.name}
@@ -94,13 +134,34 @@ export default function SeatSelection({ setCurrentSeats, currenSeats, setPickedS
                     <p>Indisponível</p>
                 </SamplingInner>
             </Sampling>
+                        
+
+            <InputBox>
+                <p>Nome do comprador:</p>
+                    <input
+                        type="text"
+                        value={userName}
+                        onChange={event => setUserName(event.target.value)}
+                        placeholder="Digite seu nome..."
+
+                    ></input>
+
+                <p>CPF do comprador:</p>
+                    <input
+                        type="text"
+                        value={userCPF}
+                        onChange={event => setUserCPF(event.target.value)}
+                        placeholder="Digite seu nome..."
+                    ></input>
+            
+            </InputBox>
+
+
 
             <SaveSeatButton>
-                <Link to={"/FinalizedSelection"}>
-                    <button>
+                    <button onClick = {SendPostRequest} >
                         Reservar Assento(s)
                     </button>
-                </Link>
             </SaveSeatButton>
 
             <Footer>
@@ -170,7 +231,7 @@ const SeatButton = styled.button`
 
 
 const Footer = styled.footer`
-margin:auto;
+    margin:auto;
     display:flex;
     width: 316px;
     height: 117px;
@@ -223,6 +284,7 @@ const Sampling = styled.div`
     margin:auto;
     justify-content:space-around;
     margin-top:30px;
+    margin-bottom:30px;
 
 `
 
@@ -246,4 +308,22 @@ const SamplingInner = styled.div`
 display:flex;
 flex-direction:column;
 align-items:center;
+`
+
+
+const InputBox = styled.div`
+width: 316px;
+margin:auto;
+
+input{
+    background: #FFFFFF;
+    border: 1px solid #D5D5D5;
+    border-radius: 3px;
+    width:300px;
+    height: 31px;
+    margin-bottom:10px;
+
+}
+p{
+}
 `

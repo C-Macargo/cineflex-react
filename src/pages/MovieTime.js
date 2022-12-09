@@ -9,6 +9,7 @@ export default function MovieTime({currentMovie, setCurrentMovie ,}){
     const { movieID } = useParams()
 
     
+    
     useEffect(() => {
             
         const requisicaohorarios = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${movieID}/showtimes`)
@@ -20,8 +21,6 @@ export default function MovieTime({currentMovie, setCurrentMovie ,}){
     
     const dates = currentMovie.days
     const sessions = dates.showtimes
-    console.log(sessions)
-    console.log(dates)
 
     return (
         <>
@@ -31,13 +30,14 @@ export default function MovieTime({currentMovie, setCurrentMovie ,}){
 
         <TimeContainer>
             {dates.map(date => (
-                <p>{date.weekday} - {date.date} 
+                <div><p>{date.weekday} - {date.date} </p>
                     {date.showtimes.map(showtime => 
                         <Link to={`/SeatSelection/${showtime.id}`}>
                         <button>{showtime.name}</button>    
                         </Link>
+
                         )}
-                </p>))}
+                </div>))}
         </TimeContainer>
 
         <Footer>
@@ -74,22 +74,38 @@ p{
 `
 
 const TimeContainer = styled.div `
-
+width:316px;
 display:flex;
 flex-direction:column;
 align-items:center;
+justify-content:space-around;
 margin:auto;
+
+button{
+    
+    width: 83px;
+    height: 43px;
+    background: #E8833A;
+    border-radius: 3px;
+    color: #FFFFFF;
+}
+
+div{
+    display:flex;
+}
 `
 
-const Footer = styled.footer `
+const Footer = styled.footer`
+    margin:auto;
     display:flex;
-    width: 100%;
+    width: 316px;
     height: 117px;
-    background-color: green;
-    position:fixed;
+    background-color: #DFE6ED;
+    border: 1px solid #9EADBA;
     bottom:0px;
     align-items:center;
     justify-content:center;
+    margin-top:30px;
 
     img{
         height: 72px;
