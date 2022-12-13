@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function SeatSelection({ setCurrentSeats, currenSeats, setFinalArray, pickedSeats, }) {
+export default function SeatSelection({ setCurrentSeats, currenSeats, setFinalArray,  }) {
     const [selectedSeats, setSelectedSeats] = useState([]);
     const { seatID } = useParams()
     const [userCPF, setUserCPF] = useState("");
@@ -71,19 +71,20 @@ export default function SeatSelection({ setCurrentSeats, currenSeats, setFinalAr
         }
         function SendPostRequest(event) {
             event.preventDefault();   
-            const sendSeatsUrl = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many"
+            const sendSeatPost = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many"
     
             axios.post(
-                sendSeatsUrl, {
+                sendSeatPost, {
                 ids: sentData,
                 name: userName,
                 cpf: userCPF,
-            }).then(r => {
+            }).then(response => {
                 EndOfOrder()
                 next("/sucesso")
                 
-            }).catch(err => {
-                console.log(err)
+            }).catch(error => {
+                console.log(error)
+                alert(error)
             });
         }
 
@@ -132,7 +133,7 @@ export default function SeatSelection({ setCurrentSeats, currenSeats, setFinalAr
                     <SamplingButton color="#C3CFD9" ></SamplingButton>
                     <p>Disponível</p>
                 </SamplingInner>
-                <SamplingInner>ta
+                <SamplingInner>
                     <SamplingButton color="#FBE192" ></SamplingButton>
                     <p>Indisponível</p>
                 </SamplingInner>

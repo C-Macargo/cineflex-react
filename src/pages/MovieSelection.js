@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 
-export default function MovieSelection({ listafilmnes, setMovieNumber, setListFilmes,}) {
+export default function MovieSelection({ listafilmnes, setListFilmes,}) {
     
 
 
@@ -31,9 +31,7 @@ export default function MovieSelection({ listafilmnes, setMovieNumber, setListFi
                 <div data-test="movie">
                 <Link to={`/sessoes/${movie.id}`} key={movie.title} >
                 <MovieContainer >
-                    <img onClick={() => {
-                        setMovieNumber(movie.id)
-                        }} src={movie.posterURL} alt={movie.title} />
+                    <img onClick={() => {}} src={movie.posterURL} alt={movie.title} />
                 </MovieContainer>
                 </Link>
                 </div>

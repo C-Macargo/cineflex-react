@@ -2,48 +2,38 @@ import styled from "styled-components"
 import { Link } from "react-router-dom";
 
 
-export default function FinalizedSelection({finalArray}){
-    
+export default function FinalizedSelection({ finalArray }) {
+
     const finalPageContent = finalArray
-    const finalPageSeats = finalArray.seats
     return (
 
         <>
-        <CurrentPage>
-            <p>Pedido feito com sucesso!</p>
-        </CurrentPage>
+            <CurrentPage>
+                <p>Pedido feito com sucesso!</p>
+            </CurrentPage>
+            <FinalPageBox>
+                <div data-test="movie-info">
+                    <h1>Filme e sessão</h1>
+                    <p>{finalPageContent.movie.movieName}</p>
+                    <p>{finalPageContent.day.movieDate} {finalPageContent.time.movieTime}</p>
+                </div>
+                <div data-test="seats-info">
+                    <h1>Ingressos</h1>
+                    {finalPageContent.seats.selectedSeats.map(seat => <p key={seat.name}>{`Assento: ${seat.name}`}</p>)}
+                </div>
+                <div data-test="client-info">
+                    <h1>Comprador</h1>
+                    <p>Nome: {finalPageContent.nome.userName}</p>
+                    <p>CPF: {finalPageContent.cpf.userCPF}</p>
+                </div>
+                <ReturnHomeButton data-test="go-home-btn">
+                    <Link to={"/"}>
+                        <p>Voltar para Home</p>
+                    </Link>
+                </ReturnHomeButton>
+            </FinalPageBox>
 
-        <FinalPageBox>
 
-            <div data-test="movie-info">
-            <h1>Filme e sessão</h1>
-                <p>{finalPageContent.movie.movieName}</p>
-                <p>{finalPageContent.day.movieDate} {finalPageContent.time.movieTime}</p>
-                
-            </div>
-
-
-            <div data-test="seats-info">
-            <h1>Ingressos</h1>
-            {finalPageContent.seats.selectedSeats.map(seat => <p key={seat.name}>{`Assento: ${seat.name}`}</p>)}
-            </div>
-
-
-            <div data-test="client-info">
-            <h1>Comprador</h1>
-                <p>Nome: {finalPageContent.nome.userName}</p>
-                <p>CPF: {finalPageContent.cpf.userCPF}</p>
-            </div>
-
-            <ReturnHomeButton data-test="go-home-btn">
-            <Link to={"/"}>
-            <p>Voltar para Home</p>
-            </Link>
-            </ReturnHomeButton>
-            
-        </FinalPageBox>
-
-   
 
         </>
     )
